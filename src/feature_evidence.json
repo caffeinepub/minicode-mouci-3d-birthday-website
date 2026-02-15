@@ -2,9 +2,28 @@
   "kind": "feature_evidence_report",
   "features": [
     {
-      "featureId": "feature-update-the-preloaded-gallery-photo-path-list-to-match-the-exact-filenames-of-the-uploaded-images-including-the-1-suffixes-so-the-site-references-the-correct-static-assets",
-      "featureTitle": "Update the preloaded gallery photo path list to match the exact filenames of the uploaded images (including the “-1” suffixes) so the site references the correct static assets.",
+      "featureId": "feature-remove-the-photo-upload-option-from-the-existing-photos-section-so-visitors-can-no-longer-upload-images-from-their-device",
+      "featureTitle": "Remove the photo upload option from the existing Photos section so visitors can no longer upload images from their device.",
       "files": [
+        "frontend/src/components/PhotosSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-replace-the-current-preloaded-photo-list-with-6-new-static-ghibli-style-couple-images-studying-on-a-laptop-biscuits-tea-gym-workouts-dancing-joyfully-riding-a-bike-together-heart-within-us-and-ensure-the-slider-displays-these-images",
+      "featureTitle": "Replace the current preloaded photo list with 6 new static, Ghibli-style couple images (studying on a laptop; biscuits & tea; gym workouts; dancing joyfully; riding a bike together; heart within us) and ensure the slider displays these images.",
+      "files": [
+        "frontend/src/components/PhotosSection.tsx",
         "frontend/src/content/preloadedPhotos.ts"
       ],
       "components": [
@@ -20,11 +39,12 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-remove-the-dedicated-on-page-audio-section-ui-and-replace-it-with-background-music-that-starts-from-the-beginning-and-plays-continuously-in-the-background",
-      "featureTitle": "Remove the dedicated on-page Audio Section UI and replace it with background music that starts from the beginning and plays continuously in the background.",
+      "featureId": "feature-add-a-cohesive-creative-ghibli-storybook-birthday-surprise-presentation-across-the-photos-section-and-its-heading-using-english-user-facing-text-while-keeping-the-existing-app-structure-hero-messages-photos",
+      "featureTitle": "Add a cohesive, creative \"Ghibli storybook birthday surprise\" presentation across the Photos section (and its heading) using English user-facing text, while keeping the existing app structure (hero → messages → photos).",
       "files": [
         "frontend/src/App.tsx",
-        "frontend/src/components/AudioSection.tsx"
+        "frontend/src/components/PhotosSection.tsx",
+        "frontend/src/index.css"
       ],
       "components": [
         "core-infrastructure@1.0.2",
@@ -39,11 +59,9 @@
       "confidence": "high"
     },
     {
-      "featureId": "feature-add-a-robust-fallback-so-the-photos-section-always-shows-at-least-one-valid-image-even-if-preloaded-photos-fail-to-load-use-a-locally-bundled-fallback-image",
-      "featureTitle": "Add a robust fallback so the Photos section always shows at least one valid image even if preloaded photos fail to load (use a locally bundled fallback image).",
-      "files": [
-        "frontend/src/components/PhotosSection.tsx"
-      ],
+      "featureId": "feature-add-the-6-newly-generated-images-as-static-frontend-assets-and-reference-them-directly-from-the-frontend-do-not-serve-images-through-the-backend",
+      "featureTitle": "Add the 6 newly generated images as static frontend assets and reference them directly from the frontend (do not serve images through the backend).",
+      "files": [],
       "components": [
         "core-infrastructure@1.0.2",
         "shadcn-ui@1.0.0",
@@ -52,25 +70,7 @@
         "github-export-icp-cli@1.0.0"
       ],
       "testIds": [
-        "REQ-5"
-      ],
-      "confidence": "high"
-    },
-    {
-      "featureId": "feature-render-any-newly-generated-image-assets-as-static-files-under-frontend-public-assets-generated-and-reference-them-directly-from-the-frontend-do-not-serve-them-through-the-backend",
-      "featureTitle": "Render any newly generated image assets as static files under frontend/public/assets/generated and reference them directly from the frontend (do not serve them through the backend).",
-      "files": [
-        "frontend/src/components/PhotosSection.tsx"
-      ],
-      "components": [
-        "core-infrastructure@1.0.2",
-        "shadcn-ui@1.0.0",
-        "build-template-react@1.0.0",
-        "initial-app@1.0.0",
-        "github-export-icp-cli@1.0.0"
-      ],
-      "testIds": [
-        "REQ-6"
+        "REQ-4"
       ],
       "confidence": "high"
     }

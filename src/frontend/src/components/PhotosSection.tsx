@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Upload, Image as ImageIcon, Heart } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Heart, BookOpen } from 'lucide-react';
 import { useSwipe } from '../hooks/useSwipe';
-import { preloadedPhotos } from '../content/preloadedPhotos';
+import { preloadedPhotos, photoStories } from '../content/preloadedPhotos';
 
 const FALLBACK_IMAGE = '/assets/generated/fallback-anime-watercolor.dim_1920x1080.png';
 
@@ -10,32 +10,11 @@ export default function PhotosSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
-  // Initialize with preloaded photos and ensure at least one valid image
+  // Initialize with preloaded photos
   useEffect(() => {
     const validImages = preloadedPhotos.length > 0 ? preloadedPhotos : [FALLBACK_IMAGE];
     setImages(validImages);
   }, []);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files) return;
-
-    const newImages: string[] = [];
-    Array.from(files).forEach((file) => {
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          if (event.target?.result) {
-            newImages.push(event.target.result as string);
-            if (newImages.length === files.length) {
-              setImages((prev) => [...prev, ...newImages]);
-            }
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  };
 
   const handleImageError = (imageSrc: string) => {
     setFailedImages((prev) => new Set(prev).add(imageSrc));
@@ -58,46 +37,53 @@ export default function PhotosSection() {
     onSwipedRight: goToPrevious,
   });
 
+  const currentStory = photoStories[currentIndex] || { chapter: '', caption: '' };
+
   return (
     <div className="space-y-8">
-      {/* Upload Section */}
-      <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl p-8 border-4 border-birthday-gold hover:shadow-2xl hover:scale-[1.02] transition-all duration-300">
-        <label
-          htmlFor="photo-upload"
-          className="group flex flex-col items-center justify-center gap-4 cursor-pointer"
-        >
-          <div className="w-20 h-20 rounded-full bg-birthday-gold/20 flex items-center justify-center group-hover:bg-birthday-gold/30 group-hover:scale-110 transition-all duration-300 group-active:scale-105">
-            <Upload className="w-10 h-10 text-birthday-gold group-hover:translate-y-[-2px] transition-transform" />
-          </div>
-          <div className="text-center">
-            <p className="text-xl font-bold text-birthday-dark group-hover:text-birthday-coral transition-colors">
-              Add More Photos
-            </p>
-            <p className="text-sm text-birthday-dark/70 mt-2">
-              Click to select multiple photos from your device
-            </p>
-          </div>
-          <input
-            id="photo-upload"
-            type="file"
-            multiple
-            accept="image/*"
-            onChange={handleFileChange}
-            className="hidden"
-          />
-        </label>
+      {/* Storybook Introduction */}
+      <div className="storybook-frame bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl p-6 md:p-8 border-4 border-birthday-gold/50">
+        <div className="flex items-center gap-3 mb-4">
+          <BookOpen className="w-6 h-6 text-birthday-gold" />
+          <h3 className="text-xl md:text-2xl font-bold text-birthday-dark">
+            A Storybook of Us
+          </h3>
+        </div>
+        <p className="text-birthday-dark/70 leading-relaxed">
+          Every great friendship is a story worth telling. Here are the chapters of our journey together, 
+          illustrated in the whimsical style of our favorite tales. Each moment captured here is a treasure, 
+          a memory that makes our bond stronger and our hearts fuller.
+        </p>
       </div>
 
-      {/* Gallery/Slider */}
-      {images.length > 0 ? (
-        <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden border-4 border-birthday-gold hover:shadow-2xl transition-all duration-300">
+      {/* Gallery/Slider with Storybook Frame */}
+      {images.length > 0 && (
+        <div className="storybook-frame bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden border-4 border-birthday-gold hover:shadow-2xl transition-all duration-300">
+          {/* Chapter Header */}
+          <div className="bg-gradient-to-r from-birthday-gold/20 via-birthday-peach/20 to-birthday-gold/20 px-6 py-4 border-b-2 border-birthday-gold/30">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-semibold text-birthday-dark/60 uppercase tracking-wider">
+                  Chapter {currentIndex + 1}
+                </span>
+              </div>
+              <span className="text-sm font-medium text-birthday-dark/70">
+                {currentIndex + 1} of {images.length}
+              </span>
+            </div>
+            <h4 className="text-xl md:text-2xl font-bold text-birthday-dark mt-2">
+              {currentStory.chapter}
+            </h4>
+          </div>
+
+          {/* Image Display */}
           <div
             {...swipeHandlers}
-            className="relative aspect-[4/3] bg-birthday-dark/5 flex items-center justify-center group"
+            className="relative aspect-[16/10] bg-gradient-to-br from-birthday-cream/50 to-birthday-peach/30 flex items-center justify-center group"
           >
             <img
               src={getImageSrc(images[currentIndex])}
-              alt={`Memory ${currentIndex + 1}`}
+              alt={currentStory.chapter}
               className="max-w-full max-h-full object-contain transition-all duration-500 animate-fade-in"
               key={currentIndex}
               onError={() => handleImageError(images[currentIndex])}
@@ -113,7 +99,7 @@ export default function PhotosSection() {
                 <button
                   onClick={goToPrevious}
                   className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-birthday-gold/90 hover:bg-birthday-gold flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110 active:scale-100 hover:shadow-xl"
-                  aria-label="Previous photo"
+                  aria-label="Previous chapter"
                 >
                   <ChevronLeft className="w-6 h-6 text-birthday-dark" />
                 </button>
@@ -121,7 +107,7 @@ export default function PhotosSection() {
                 <button
                   onClick={goToNext}
                   className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-birthday-gold/90 hover:bg-birthday-gold flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110 active:scale-100 hover:shadow-xl"
-                  aria-label="Next photo"
+                  aria-label="Next chapter"
                 >
                   <ChevronRight className="w-6 h-6 text-birthday-dark" />
                 </button>
@@ -129,10 +115,17 @@ export default function PhotosSection() {
             )}
           </div>
 
+          {/* Caption */}
+          <div className="px-6 py-5 bg-gradient-to-b from-birthday-cream/50 to-white/50 border-t-2 border-birthday-gold/20">
+            <p className="text-center text-birthday-dark/80 italic leading-relaxed text-base md:text-lg">
+              {currentStory.caption}
+            </p>
+          </div>
+
           {/* Thumbnails */}
           {images.length > 1 && (
-            <div className="p-4 bg-birthday-gold/10">
-              <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+            <div className="p-4 bg-birthday-gold/10 border-t border-birthday-gold/20">
+              <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide justify-center">
                 {images.map((img, idx) => (
                   <button
                     key={idx}
@@ -142,27 +135,19 @@ export default function PhotosSection() {
                         ? 'border-birthday-gold scale-110 shadow-lg'
                         : 'border-transparent opacity-60 hover:opacity-100 hover:scale-105'
                     }`}
+                    aria-label={`Go to chapter ${idx + 1}`}
                   >
                     <img 
                       src={getImageSrc(img)} 
-                      alt={`Thumbnail ${idx + 1}`} 
+                      alt={`Chapter ${idx + 1}`} 
                       className="w-full h-full object-cover"
                       onError={() => handleImageError(img)}
                     />
                   </button>
                 ))}
               </div>
-              <p className="text-center text-sm text-birthday-dark/70 mt-2 font-medium">
-                {currentIndex + 1} / {images.length}
-              </p>
             </div>
           )}
-        </div>
-      ) : (
-        <div className="bg-white/50 backdrop-blur-sm rounded-3xl shadow-xl p-12 border-4 border-dashed border-birthday-gold/50 text-center hover:border-birthday-gold transition-all duration-300">
-          <ImageIcon className="w-16 h-16 text-birthday-gold/50 mx-auto mb-4 animate-bounce-gentle" />
-          <p className="text-lg text-birthday-dark/70">No photos uploaded yet</p>
-          <p className="text-sm text-birthday-dark/50 mt-2">Upload some memories to see them here!</p>
         </div>
       )}
     </div>

@@ -1,84 +1,73 @@
 {
   "kind": "coverage_report",
   "version": "1.0",
-  "generatedAt": "2026-02-15T06:45:41.106Z",
+  "generatedAt": "2026-02-15T10:54:24.819Z",
   "sources": {
     "buildRequest": true,
     "implementationPlan": true
   },
   "requirements": {
-    "total": 6,
+    "total": 4,
     "implemented": 4,
     "items": [
       {
         "id": "REQ-1",
-        "summary": "Add the 6 user-uploaded WhatsApp JPEG images as static frontend assets and ensure they load in production without 404s.",
-        "status": "missing",
+        "summary": "Remove the photo upload option from the existing Photos section so visitors can no longer upload images from their device.",
+        "status": "implemented",
         "plannedFiles": [
-          "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.27.00 AM-1.jpeg",
-          "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.59 AM (2)-1.jpeg",
-          "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.58 AM-1.jpeg",
-          "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.59 AM-1.jpeg",
-          "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.58 AM (1)-1.jpeg",
-          "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.59 AM (1)-1.jpeg"
+          "frontend/src/components/PhotosSection.tsx"
         ],
-        "matchedFiles": []
+        "matchedFiles": [
+          "frontend/src/components/PhotosSection.tsx"
+        ]
       },
       {
         "id": "REQ-2",
-        "summary": "Update the preloaded gallery photo path list to match the exact filenames of the uploaded images (including the “-1” suffixes) so the site references the correct static assets.",
+        "summary": "Replace the current preloaded photo list with 6 new static, Ghibli-style couple images (studying on a laptop; biscuits & tea; gym workouts; dancing joyfully; riding a bike together; heart within us) and ensure the slider displays these images.",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/content/preloadedPhotos.ts"
+          "frontend/src/content/preloadedPhotos.ts",
+          "frontend/src/components/PhotosSection.tsx"
         ],
         "matchedFiles": [
-          "frontend/src/content/preloadedPhotos.ts"
+          "frontend/src/content/preloadedPhotos.ts",
+          "frontend/src/components/PhotosSection.tsx"
         ]
       },
       {
         "id": "REQ-3",
-        "summary": "Remove the dedicated on-page Audio Section UI and replace it with background music that starts from the beginning and plays continuously in the background.",
+        "summary": "Add a cohesive, creative \"Ghibli storybook birthday surprise\" presentation across the Photos section (and its heading) using English user-facing text, while keeping the existing app structure (hero → messages → photos).",
         "status": "implemented",
         "plannedFiles": [
           "frontend/src/App.tsx",
-          "frontend/src/components/AudioSection.tsx"
+          "frontend/src/components/PhotosSection.tsx",
+          "frontend/src/index.css"
         ],
         "matchedFiles": [
           "frontend/src/App.tsx",
-          "frontend/src/components/AudioSection.tsx"
+          "frontend/src/components/PhotosSection.tsx",
+          "frontend/src/index.css"
         ]
       },
       {
         "id": "REQ-4",
-        "summary": "Bundle the friendship song audio file as a static frontend asset at the exact path used by the app and ensure the deployed production site can fetch it without errors.",
-        "status": "missing",
-        "plannedFiles": [
-          "frontend/public/assets/audio/tamil-friendship-song.mp3"
-        ],
-        "matchedFiles": []
-      },
-      {
-        "id": "REQ-5",
-        "summary": "Add a robust fallback so the Photos section always shows at least one valid image even if preloaded photos fail to load (use a locally bundled fallback image).",
+        "summary": "Add the 6 newly generated images as static frontend assets and reference them directly from the frontend (do not serve images through the backend).",
         "status": "implemented",
         "plannedFiles": [
-          "frontend/src/components/PhotosSection.tsx"
+          "frontend/public/assets/generated/ghibli-couple-study-laptop.dim_1920x1080.png",
+          "frontend/public/assets/generated/ghibli-couple-biscuits-tea.dim_1920x1080.png",
+          "frontend/public/assets/generated/ghibli-couple-gym-workout.dim_1920x1080.png",
+          "frontend/public/assets/generated/ghibli-couple-dance-joy.dim_1920x1080.png",
+          "frontend/public/assets/generated/ghibli-couple-bike-together.dim_1920x1080.png",
+          "frontend/public/assets/generated/ghibli-couple-heart-within.dim_1920x1080.png"
         ],
         "matchedFiles": [
-          "frontend/src/components/PhotosSection.tsx"
-        ]
-      },
-      {
-        "id": "REQ-6",
-        "summary": "Render any newly generated image assets as static files under frontend/public/assets/generated and reference them directly from the frontend (do not serve them through the backend).",
-        "status": "implemented",
-        "plannedFiles": [
-          "frontend/public/assets/generated/fallback-anime-watercolor.dim_1920x1080.png",
-          "frontend/src/components/PhotosSection.tsx"
-        ],
-        "matchedFiles": [
-          "frontend/public/assets/generated/fallback-anime-watercolor.dim_1920x1080.png",
-          "frontend/src/components/PhotosSection.tsx"
+          "frontend/public/assets/generated/ghibli-couple-study-laptop.dim_1920x1080.png",
+          "frontend/public/assets/generated/ghibli-couple-biscuits-tea.dim_1920x1080.png",
+          "frontend/public/assets/generated/ghibli-couple-gym-workout.dim_1920x1080.png",
+          "frontend/public/assets/generated/ghibli-couple-dance-joy.dim_1920x1080.png",
+          "frontend/public/assets/generated/ghibli-couple-bike-together.dim_1920x1080.png",
+          "frontend/public/assets/generated/ghibli-couple-heart-within.dim_1920x1080.png"
         ]
       }
     ]
@@ -88,11 +77,16 @@
     "feature_evidence.json",
     "frontend-file-summaries.txt",
     "frontend-implementation-plan.json",
-    "frontend/public/assets/generated/fallback-anime-watercolor.dim_1920x1080.png",
+    "frontend/public/assets/generated/ghibli-couple-bike-together.dim_1920x1080.png",
+    "frontend/public/assets/generated/ghibli-couple-biscuits-tea.dim_1920x1080.png",
+    "frontend/public/assets/generated/ghibli-couple-dance-joy.dim_1920x1080.png",
+    "frontend/public/assets/generated/ghibli-couple-gym-workout.dim_1920x1080.png",
+    "frontend/public/assets/generated/ghibli-couple-heart-within.dim_1920x1080.png",
+    "frontend/public/assets/generated/ghibli-couple-study-laptop.dim_1920x1080.png",
     "frontend/src/App.tsx",
-    "frontend/src/components/AudioSection.tsx",
     "frontend/src/components/PhotosSection.tsx",
     "frontend/src/content/preloadedPhotos.ts",
+    "frontend/src/index.css",
     "project_state.json",
     "scratch/component-selection.json",
     "spec.md",

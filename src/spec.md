@@ -1,14 +1,12 @@
 # Specification
 
 ## Summary
-**Goal:** Fix broken/missing preloaded photo/audio assets and switch the friendship song to continuous background music that starts from the beginning.
+**Goal:** Turn the Photos section into a “Ghibli storybook birthday surprise” gallery using 6 static couple illustrations, and remove all photo upload functionality.
 
 **Planned changes:**
-- Add the 6 uploaded WhatsApp JPEGs as public static assets and ensure they are accessible by direct URL in production (no 404s).
-- Update the preloaded gallery photo list to reference the exact shipped filenames (including spaces/parentheses and “-1” suffixes) so all 6 render correctly.
-- Remove the dedicated on-page “Our Friendship Song” section and implement continuous background music playback starting at timestamp 0, with a first-interaction fallback if autoplay is blocked.
-- Bundle the MP3 at `/assets/audio/tamil-friendship-song.mp3` as a static public asset and ensure it loads in production without errors.
-- Add a locally bundled fallback image so the Photos section always shows at least one valid image even if some preloaded photos fail to load.
-- Store any newly generated fallback image under `frontend/public/assets/generated` and reference it via direct `/assets/generated/...` URLs.
+- Remove the photo upload UI/CTA from the Photos section, along with the hidden file input, upload handler logic, and any unused Upload icon import.
+- Replace the current preloaded photo list with exactly 6 new static Ghibli-style couple images (study with laptop; biscuits & tea; gym workout; joyful dancing; bike ride together; “heart within us”) and ensure the slider displays these images.
+- Update the Photos section heading and light framing text/styling to an English, storybook-themed presentation while keeping the existing page structure (hero → messages → photos).
+- Add the 6 images as static files under `frontend/public/assets/generated/` and reference them directly via `/assets/generated/<filename>.png` (no backend involvement).
 
-**User-visible outcome:** The Photos section immediately shows a working preloaded gallery (no broken images), and the friendship song plays continuously in the background from the beginning (starting on first interaction if required), with no separate audio section shown.
+**User-visible outcome:** Visitors see a storybook-style Photos section with a 6-image Ghibli-inspired couple gallery and can browse the slider, but can no longer upload photos.

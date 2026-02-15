@@ -106,9 +106,14 @@ function App() {
           {/* Photos Section */}
           <section className="py-16 px-4 bg-gradient-to-b from-birthday-cream to-birthday-peach">
             <div className="max-w-6xl mx-auto">
-              <h2 className="text-4xl md:text-5xl font-bold text-center text-birthday-gold mb-12 drop-shadow-lg animate-slide-in-down">
-                Our Memories Together
-              </h2>
+              <div className="text-center mb-12 space-y-4">
+                <h2 className="storybook-title text-4xl md:text-5xl font-bold text-birthday-gold drop-shadow-lg animate-slide-in-down">
+                  Our Story Together
+                </h2>
+                <p className="storybook-subtitle text-lg md:text-xl text-birthday-dark/70 italic max-w-2xl mx-auto">
+                  A tale of friendship, laughter, and beautiful moments we've shared
+                </p>
+              </div>
               <PhotosSection />
             </div>
           </section>

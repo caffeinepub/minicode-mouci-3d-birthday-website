@@ -77,6 +77,42 @@
             0 8px 16px rgba(255, 215, 0, 0.2);
     }
     
+    .storybook-title {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        letter-spacing: -0.01em;
+    }
+    
+    .storybook-subtitle {
+        font-family: 'Georgia', 'Times New Roman', serif;
+    }
+    
+    .storybook-frame {
+        position: relative;
+    }
+    
+    .storybook-frame::before {
+        content: '';
+        position: absolute;
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        background: linear-gradient(
+            135deg,
+            oklch(var(--birthday-gold) / 0.3),
+            oklch(var(--birthday-peach) / 0.2),
+            oklch(var(--birthday-coral) / 0.3)
+        );
+        border-radius: inherit;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .storybook-frame:hover::before {
+        opacity: 1;
+    }
+    
     .bg-birthday-cream {
         background-color: oklch(var(--birthday-cream));
     }

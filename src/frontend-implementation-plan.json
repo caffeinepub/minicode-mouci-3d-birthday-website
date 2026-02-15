@@ -1,132 +1,109 @@
 {
   "kind": "implementation_plan",
   "version": "1.0",
-  "title": "Fix static photo/audio assets and autoplay background music",
+  "title": "Replace uploadable photo gallery with static Ghibli-style storybook slider",
   "requirements": [
     {
       "id": "REQ-1",
-      "summary": "Ship the 6 uploaded WhatsApp JPEGs as public static assets and ensure they load without 404s in production.",
+      "summary": "Remove the photo upload UI and related upload logic from the Photos section.",
       "acceptanceCriteria": [
-        "All 6 uploaded images are present under frontend/public/assets/photos/preloaded/ (or an equivalent public static directory) and are accessible by direct URL in production.",
-        "Loading the Photos section shows the preloaded gallery immediately (no user upload required) and does not display broken-image icons.",
-        "Browser console shows no 404 errors for any preloaded photo asset."
+        "The upload card/CTA (\"Add More Photos\") is no longer rendered in the Photos section UI.",
+        "The hidden <input type=\"file\"> and related upload handler logic are removed or unused.",
+        "The Photos section no longer imports or renders the Upload icon from lucide-react."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.27.00 AM-1.jpeg",
-          "operation": "create",
-          "description": "Add the uploaded photo to the public static directory so it is served directly in production."
-        },
-        {
-          "path": "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.59 AM (2)-1.jpeg",
-          "operation": "create",
-          "description": "Add the uploaded photo to the public static directory so it is served directly in production."
-        },
-        {
-          "path": "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.58 AM-1.jpeg",
-          "operation": "create",
-          "description": "Add the uploaded photo to the public static directory so it is served directly in production."
-        },
-        {
-          "path": "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.59 AM-1.jpeg",
-          "operation": "create",
-          "description": "Add the uploaded photo to the public static directory so it is served directly in production."
-        },
-        {
-          "path": "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.58 AM (1)-1.jpeg",
-          "operation": "create",
-          "description": "Add the uploaded photo to the public static directory so it is served directly in production."
-        },
-        {
-          "path": "frontend/public/assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.59 AM (1)-1.jpeg",
-          "operation": "create",
-          "description": "Add the uploaded photo to the public static directory so it is served directly in production."
+          "path": "frontend/src/components/PhotosSection.tsx",
+          "operation": "modify",
+          "description": "Remove the upload card/CTA, hidden file input, and FileReader-based upload handler; remove lucide-react Upload import; ensure empty-state copy no longer suggests uploading. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
       "id": "REQ-2",
-      "summary": "Update the preloaded gallery list to reference the exact shipped filenames (including “-1” suffixes).",
+      "summary": "Update the preloaded gallery to use exactly 6 new generated Ghibli-style couple images and ensure the slider uses them.",
       "acceptanceCriteria": [
-        "frontend/src/content/preloadedPhotos.ts references the exact filenames actually shipped in frontend/public/assets/photos/preloaded/.",
-        "The gallery renders all 6 photos in the slider/thumbnails without requiring URL encoding fixes by the user."
+        "frontend/src/content/preloadedPhotos.ts is updated to reference exactly 6 image paths under /assets/generated/ for the new Ghibli-style images.",
+        "The Photos section initializes its gallery from the updated preloaded photo list and shows the 6 images in the slider with navigation/thumbnails.",
+        "No references to the existing WhatsApp preloaded JPEG filenames remain in preloadedPhotos.ts."
       ],
       "file_operations": [
         {
           "path": "frontend/src/content/preloadedPhotos.ts",
           "operation": "modify",
-          "description": "Replace the preloaded photo URL list with the exact static paths for: /assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.27.00 AM-1.jpeg, /assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.59 AM (2)-1.jpeg, /assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.58 AM-1.jpeg, /assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.59 AM-1.jpeg, /assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.58 AM (1)-1.jpeg, /assets/photos/preloaded/WhatsApp Image 2026-02-15 at 11.26.59 AM (1)-1.jpeg."
+          "description": "Replace the existing WhatsApp JPEG paths with exactly 6 absolute paths pointing to the generated assets: /assets/generated/ghibli-couple-study-laptop.dim_1920x1080.png, /assets/generated/ghibli-couple-biscuits-tea.dim_1920x1080.png, /assets/generated/ghibli-couple-gym-workout.dim_1920x1080.png, /assets/generated/ghibli-couple-dance-joy.dim_1920x1080.png, /assets/generated/ghibli-couple-bike-together.dim_1920x1080.png, /assets/generated/ghibli-couple-heart-within.dim_1920x1080.png. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/components/PhotosSection.tsx",
+          "operation": "modify",
+          "description": "Ensure the gallery/slider state is derived from the updated preloadedPhotos list (keeping fallback image behavior) and that navigation + thumbnails correctly cover all 6 images. Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
       "id": "REQ-3",
-      "summary": "Remove the dedicated Audio Section UI and play the friendship song as continuous background music starting from the beginning with an autoplay fallback after first interaction.",
+      "summary": "Apply an English, storybook-themed 'Ghibli storybook birthday surprise' presentation to the Photos section heading and framing without changing app structure.",
       "acceptanceCriteria": [
-        "There is no visible “Our Friendship Song” section in the main content.",
-        "Background audio begins at timestamp 0 when playback starts and continues playing as the user scrolls through the site.",
-        "If autoplay is blocked by the browser, the app starts playback immediately after the user’s first interaction (e.g., clicking “Open Your Birthday Gifts”), without showing a separate song section."
+        "The Photos section heading in frontend/src/App.tsx is updated to an English, storybook-themed title (not \"Our Memories Together\").",
+        "The Photos section includes light storybook-like framing (e.g., caption/chapter feel, gentle decorative styling) without introducing new data entry or upload features.",
+        "All new/updated user-facing text is in English."
       ],
       "file_operations": [
         {
           "path": "frontend/src/App.tsx",
           "operation": "modify",
-          "description": "Remove the on-page “Our Friendship Song” section and AudioSection import/usage, and add a hidden looping HTMLAudioElement wired to start playback from timestamp 0 on first user interaction (e.g., the existing “Open Your Birthday Gifts” click) and persist across scrolling."
+          "description": "Update the Photos section heading text to an English storybook-themed title consistent with a 'Ghibli storybook birthday surprise' (keeping the existing hero → messages → photos structure unchanged). Verify the component's usage instructions before implementing."
         },
         {
-          "path": "frontend/src/components/AudioSection.tsx",
-          "operation": "delete",
-          "description": "Remove the dedicated audio UI component file so the app no longer renders a separate song section."
+          "path": "frontend/src/components/PhotosSection.tsx",
+          "operation": "modify",
+          "description": "Add storybook-like framing around the slider (e.g., chapter-style intro/subtitle and per-slide English captions aligned to the six scenes) while keeping the gallery read-only and removing any data-entry affordances. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/index.css",
+          "operation": "modify",
+          "description": "Add minimal global styling utilities (via existing Tailwind layers) to support a subtle storybook frame/caption feel used by PhotosSection (no new stylesheet files). Verify the component's usage instructions before implementing."
         }
       ]
     },
     {
       "id": "REQ-4",
-      "summary": "Bundle the friendship song MP3 as a public static asset at the exact path used by the app.",
+      "summary": "Add the 6 generated images as static frontend assets under frontend/public and reference them directly via /assets/generated paths.",
       "acceptanceCriteria": [
-        "An MP3 exists at frontend/public/assets/audio/tamil-friendship-song.mp3 and is fetchable in production (no 404).",
-        "Browser console shows no audio asset load errors, and playback succeeds once allowed by the browser’s autoplay policy."
+        "All 6 new images exist as static files under frontend/public/assets/generated/ with the exact filenames specified in the image requirements.",
+        "The app references the images via absolute paths like /assets/generated/<filename>.png.",
+        "No backend code is added/required to fetch or serve these images."
       ],
       "file_operations": [
         {
-          "path": "frontend/public/assets/audio/tamil-friendship-song.mp3",
+          "path": "frontend/public/assets/generated/ghibli-couple-study-laptop.dim_1920x1080.png",
           "operation": "create",
-          "description": "Add the friendship song audio file to the public static directory at the exact path referenced by the background audio implementation so it is fetchable in production."
-        }
-      ]
-    },
-    {
-      "id": "REQ-5",
-      "summary": "Add a robust local fallback so the Photos section always shows at least one valid image even if preloaded photos fail.",
-      "acceptanceCriteria": [
-        "If any preloaded photo URL fails to load, the UI gracefully continues and still displays at least one image using a bundled fallback asset.",
-        "The Photos section never renders an empty/broken state solely due to missing preloaded assets."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/src/components/PhotosSection.tsx",
-          "operation": "modify",
-          "description": "Add error-handling for image loading (main slide and thumbnails) to swap failed URLs to a locally bundled fallback image at /assets/generated/fallback-anime-watercolor.dim_1920x1080.png and ensure at least one displayable image remains if preloaded assets fail."
-        }
-      ]
-    },
-    {
-      "id": "REQ-6",
-      "summary": "Place newly generated images under frontend/public/assets/generated and reference them directly from the frontend for the fallback behavior.",
-      "acceptanceCriteria": [
-        "Generated image files are placed in frontend/public/assets/generated.",
-        "The fallback image requirement (REQ-5) uses the generated asset via a direct /assets/generated/... URL."
-      ],
-      "file_operations": [
-        {
-          "path": "frontend/public/assets/generated/fallback-anime-watercolor.dim_1920x1080.png",
-          "operation": "create",
-          "description": "Add the generated fallback image as a static public asset at the exact path frontend/public/assets/generated/fallback-anime-watercolor.dim_1920x1080.png so it can be referenced directly by the Photos fallback logic."
+          "description": "Add the generated static image asset to the frontend public folder (study together with a laptop)."
         },
         {
-          "path": "frontend/src/components/PhotosSection.tsx",
-          "operation": "modify",
-          "description": "Wire the fallback image URL /assets/generated/fallback-anime-watercolor.dim_1920x1080.png into the Photos section rendering and load-error handling so it is used as the local bundled fallback."
+          "path": "frontend/public/assets/generated/ghibli-couple-biscuits-tea.dim_1920x1080.png",
+          "operation": "create",
+          "description": "Add the generated static image asset to the frontend public folder (sharing biscuits and tea)."
+        },
+        {
+          "path": "frontend/public/assets/generated/ghibli-couple-gym-workout.dim_1920x1080.png",
+          "operation": "create",
+          "description": "Add the generated static image asset to the frontend public folder (gym workout together)."
+        },
+        {
+          "path": "frontend/public/assets/generated/ghibli-couple-dance-joy.dim_1920x1080.png",
+          "operation": "create",
+          "description": "Add the generated static image asset to the frontend public folder (dancing joyfully)."
+        },
+        {
+          "path": "frontend/public/assets/generated/ghibli-couple-bike-together.dim_1920x1080.png",
+          "operation": "create",
+          "description": "Add the generated static image asset to the frontend public folder (riding a bicycle together)."
+        },
+        {
+          "path": "frontend/public/assets/generated/ghibli-couple-heart-within.dim_1920x1080.png",
+          "operation": "create",
+          "description": "Add the generated static image asset to the frontend public folder (heart within us motif)."
         }
       ]
     }

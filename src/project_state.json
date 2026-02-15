@@ -1,46 +1,41 @@
 {
   "schemaVersion": "1.0.0",
   "projectStateVersion": 3,
-  "summary": "Website project: publish a birthday-style site that reliably shows images and plays background music from the start.",
-  "architectural_notes": [
-    "Static assets (images/audio) must be present in the production build (e.g., under public/assets or an equivalent bundled path).",
-    "Background audio should be initialized on page load and not rendered as a separate UI section."
-  ],
-  "known_issues": [
-    "Production site currently does not display images and does not play the song due to missing/incorrect asset paths or missing files."
-  ],
-  "isFixRequest": true,
-  "imageRequirements": "## Required Images\n- Anime-inspired watercolor birthday landscape illustration with warm pastel tones and soft film-grain texture (fallback-anime-watercolor.dim_1920x1080.png)",
+  "summary": "Build a new birthday-surprise website featuring multiple Ghibli-style images of the user and partner, and remove the prior site's photo upload section.",
+  "architectural_notes": [],
+  "known_issues": [],
+  "isFixRequest": false,
+  "imageRequirements": "## Required Images\n- Ghibli-inspired anime watercolor illustration of a couple studying together with a laptop, cozy indoor lighting, warm pastel palette, soft film grain (ghibli-couple-study-laptop.dim_1920x1080.png)\n- Ghibli-inspired anime watercolor illustration of a couple sharing biscuits and tea at a small table, warm afternoon light, gentle bokeh, pastel tones (ghibli-couple-biscuits-tea.dim_1920x1080.png)\n- Ghibli-inspired anime watercolor illustration of a couple doing gym workouts together, playful energetic mood, soft shaded lighting, pastel colors (ghibli-couple-gym-workout.dim_1920x1080.png)\n- Ghibli-inspired anime watercolor illustration of a couple dancing joyfully, flowing motion, sparkling lights, warm celebratory palette (ghibli-couple-dance-joy.dim_1920x1080.png)\n- Ghibli-inspired anime watercolor illustration of a couple riding a bicycle together, scenic path, wind-swept hair, lush greenery, warm sunlight (ghibli-couple-bike-together.dim_1920x1080.png)\n- Ghibli-inspired anime watercolor illustration symbolizing a heart within the couple, gentle glowing heart motif, dreamy background, warm pastel palette (ghibli-couple-heart-within.dim_1920x1080.png)",
   "existing_features": [
     {
-      "id": "feature-update-the-preloaded-gallery-photo-path-list-to-match-the-exact-filenames-of-the-uploaded-images-including-the-1-suffixes-so-the-site-references-the-correct-static-assets",
-      "title": "Update the preloaded gallery photo path list to match the exact filenames of the uploaded images (including the “-1” suffixes) so the site references the correct static assets.",
+      "id": "feature-remove-the-photo-upload-option-from-the-existing-photos-section-so-visitors-can-no-longer-upload-images-from-their-device",
+      "title": "Remove the photo upload option from the existing Photos section so visitors can no longer upload images from their device.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-replace-the-current-preloaded-photo-list-with-6-new-static-ghibli-style-couple-images-studying-on-a-laptop-biscuits-tea-gym-workouts-dancing-joyfully-riding-a-bike-together-heart-within-us-and-ensure-the-slider-displays-these-images",
+      "title": "Replace the current preloaded photo list with 6 new static, Ghibli-style couple images (studying on a laptop; biscuits & tea; gym workouts; dancing joyfully; riding a bike together; heart within us) and ensure the slider displays these images.",
       "reqIds": [
         "REQ-2"
       ],
       "version": 1
     },
     {
-      "id": "feature-remove-the-dedicated-on-page-audio-section-ui-and-replace-it-with-background-music-that-starts-from-the-beginning-and-plays-continuously-in-the-background",
-      "title": "Remove the dedicated on-page Audio Section UI and replace it with background music that starts from the beginning and plays continuously in the background.",
+      "id": "feature-add-a-cohesive-creative-ghibli-storybook-birthday-surprise-presentation-across-the-photos-section-and-its-heading-using-english-user-facing-text-while-keeping-the-existing-app-structure-hero-messages-photos",
+      "title": "Add a cohesive, creative \"Ghibli storybook birthday surprise\" presentation across the Photos section (and its heading) using English user-facing text, while keeping the existing app structure (hero → messages → photos).",
       "reqIds": [
         "REQ-3"
       ],
       "version": 1
     },
     {
-      "id": "feature-add-a-robust-fallback-so-the-photos-section-always-shows-at-least-one-valid-image-even-if-preloaded-photos-fail-to-load-use-a-locally-bundled-fallback-image",
-      "title": "Add a robust fallback so the Photos section always shows at least one valid image even if preloaded photos fail to load (use a locally bundled fallback image).",
+      "id": "feature-add-the-6-newly-generated-images-as-static-frontend-assets-and-reference-them-directly-from-the-frontend-do-not-serve-images-through-the-backend",
+      "title": "Add the 6 newly generated images as static frontend assets and reference them directly from the frontend (do not serve images through the backend).",
       "reqIds": [
-        "REQ-5"
-      ],
-      "version": 1
-    },
-    {
-      "id": "feature-render-any-newly-generated-image-assets-as-static-files-under-frontend-public-assets-generated-and-reference-them-directly-from-the-frontend-do-not-serve-them-through-the-backend",
-      "title": "Render any newly generated image assets as static files under frontend/public/assets/generated and reference them directly from the frontend (do not serve them through the backend).",
-      "reqIds": [
-        "REQ-6"
+        "REQ-4"
       ],
       "version": 1
     }
@@ -48,40 +43,25 @@
   "new_feature_requests": [
     {
       "id": "AR-1",
-      "summary": "Ensure at least one valid image is included and displays without errors (use a Ghibli-style image or a real photo as fallback).",
+      "summary": "Remove the photo upload option/section from the existing website",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-2",
-      "summary": "Play the song automatically from the beginning as background music (no dedicated song section).",
+      "summary": "Add a set of Ghibli-style couple images (studying on laptop, biscuits & tea, gym workout, dancing, riding bike together, heart-within-us) to the new birthday-surprise website",
       "reqIds": [],
       "status": "pending"
     },
     {
       "id": "AR-3",
-      "summary": "Fix missing/static asset setup so images and audio files are correctly packaged and load in production without errors.",
+      "summary": "Create a new 'pro' birthday surprise website experience with creative presentation to surprise her",
       "reqIds": [],
-      "status": "pending"
-    },
-    {
-      "id": "AR-4",
-      "summary": "Add the 6 user-uploaded WhatsApp JPEG images as static frontend assets and ensure they load in production without 404s.",
-      "reqIds": [
-        "REQ-1"
-      ],
-      "status": "pending"
-    },
-    {
-      "id": "AR-7",
-      "summary": "Bundle the friendship song audio file as a static frontend asset at the exact path used by the app and ensure the deployed production site can fetch it without errors.",
-      "reqIds": [
-        "REQ-4"
-      ],
       "status": "pending"
     }
   ],
-  "projectName": "Fix missing photo/audio assets and enable autoplay background music",
+  "gameProjectType": "none",
+  "projectName": "Remove photo upload and replace gallery with 6 Ghibli-style couple images (storybook birthday surprise)",
   "clarification_mode": "instant",
   "clarification_rounds": 0
 }
