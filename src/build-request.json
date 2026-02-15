@@ -1,0 +1,138 @@
+{
+  "kind": "build_request",
+  "title": "Fix missing photo/audio assets and enable autoplay background music",
+  "priority": "high",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Add the 6 user-uploaded WhatsApp JPEG images as static frontend assets and ensure they load in production without 404s.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "The user has uploaded 6 image(s): WhatsApp Image 2026-02-15 at 11.27.00 AM-1.jpeg, WhatsApp Image 2026-02-15 at 11.26.59 AM (2)-1.jpeg, WhatsApp Image 2026-02-15 at 11.26.58 AM-1.jpeg, WhatsApp Image 2026-02-15 at 11.26.59 AM-1.jpeg, WhatsApp Image 2026-02-15 at 11.26.58 AM (1)-1.jpeg, WhatsApp Image 2026-02-15 at 11.26.59 AM (1)-1.jpeg."
+        ]
+      },
+      "acceptanceCriteria": [
+        "All 6 uploaded images are present under frontend/public/assets/photos/preloaded/ (or an equivalent public static directory) and are accessible by direct URL in production.",
+        "Loading the Photos section shows the preloaded gallery immediately (no user upload required) and does not display broken-image icons.",
+        "Browser console shows no 404 errors for any preloaded photo asset."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Update the preloaded gallery photo path list to match the exact filenames of the uploaded images (including the “-1” suffixes) so the site references the correct static assets.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "include all these without any error"
+        ]
+      },
+      "acceptanceCriteria": [
+        "frontend/src/content/preloadedPhotos.ts references the exact filenames actually shipped in frontend/public/assets/photos/preloaded/.",
+        "The gallery renders all 6 photos in the slider/thumbnails without requiring URL encoding fixes by the user."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Remove the dedicated on-page Audio Section UI and replace it with background music that starts from the beginning and plays continuously in the background.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "no need to put section for song it should be played on the background",
+          "song should be played from the beginig"
+        ]
+      },
+      "acceptanceCriteria": [
+        "There is no visible “Our Friendship Song” section in the main content.",
+        "Background audio begins at timestamp 0 when playback starts and continues playing as the user scrolls through the site.",
+        "If autoplay is blocked by the browser, the app starts playback immediately after the user’s first interaction (e.g., clicking “Open Your Birthday Gifts”), without showing a separate song section."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Bundle the friendship song audio file as a static frontend asset at the exact path used by the app and ensure the deployed production site can fetch it without errors.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "song should be played from the beginig"
+        ]
+      },
+      "acceptanceCriteria": [
+        "An MP3 exists at frontend/public/assets/audio/tamil-friendship-song.mp3 and is fetchable in production (no 404).",
+        "Browser console shows no audio asset load errors, and playback succeeds once allowed by the browser’s autoplay policy."
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Add a robust fallback so the Photos section always shows at least one valid image even if preloaded photos fail to load (use a locally bundled fallback image).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "atleat include ghibli image or real photo"
+        ]
+      },
+      "acceptanceCriteria": [
+        "If any preloaded photo URL fails to load, the UI gracefully continues and still displays at least one image using a bundled fallback asset.",
+        "The Photos section never renders an empty/broken state solely due to missing preloaded assets."
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Render any newly generated image assets as static files under frontend/public/assets/generated and reference them directly from the frontend (do not serve them through the backend).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-1"
+        ],
+        "quotes": [
+          "atleat include ghibli image or real photo"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Generated image files are placed in frontend/public/assets/generated.",
+        "The fallback image requirement (REQ-5) uses the generated asset via a direct /assets/generated/... URL."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui (read-only).",
+    "Do not edit frontend/src/hooks/useInternetIdentity.ts, frontend/src/hooks/useInternetIdentity.tsx, frontend/src/hooks/useActor.ts, or frontend/src/main.tsx (immutable paths).",
+    "Keep the backend as a single Motoko actor; no new backend services."
+  ],
+  "nonGoals": [
+    "Adding third-party audio streaming services or external CDNs for images/audio.",
+    "Implementing backend storage for uploaded photos/audio.",
+    "Adding a separate music player page/section or requiring the user to navigate to start music."
+  ],
+  "imageRequirements": {
+    "required": [
+      "Anime-inspired watercolor birthday landscape illustration with warm pastel tones and soft film-grain texture (fallback-anime-watercolor.dim_1920x1080.png)"
+    ],
+    "edits": []
+  },
+  "userProfileUpdate": {
+    "goalsToAdd": [],
+    "goalsToRemove": [],
+    "preferencesToAdd": [],
+    "preferencesToRemove": [],
+    "miscToAdd": [],
+    "miscToRemove": [],
+    "fieldsToSet": {},
+    "fieldsToDelete": []
+  }
+}

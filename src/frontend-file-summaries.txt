@@ -1,0 +1,13 @@
+{
+  "frontend/src/App.tsx": "Main application component with hero section, 3D scene, smooth scroll-to-content transition, gift messages, photo gallery, and background audio that plays continuously from the beginning after first user interaction (clicking \"Open Your Birthday Gifts\").",
+  "frontend/src/components/BirthdayScene3D.tsx": "Interactive 3D scene using React Three Fiber with floating gift boxes, confetti particles created using THREE.BufferGeometry, sparkles, and auto-rotating camera controls.",
+  "frontend/src/components/GiftRevealMessages.tsx": "Progressive reveal component displaying birthday messages as gift cards with enhanced hover effects, sparkle icons, smooth opening transitions, and delightful micro-interactions.",
+  "frontend/src/components/PhotosSection.tsx": "Photo gallery initialized with preloaded photos, file upload that appends new images, image slider with navigation, swipe gestures, thumbnails, warm hover effects including heart overlays, and robust error handling that falls back to a bundled anime watercolor image if any preloaded photo fails to load.",
+  "frontend/src/components/AudioSection.tsx": "Audio player section for \"Jigiri Dosthuuu\" song with enhanced hover effects, heartbeat animation, and instructions for replacing the audio file.",
+  "frontend/src/content/birthdayMessages.ts": "Content module exporting the three exact birthday/friendship message blocks as provided by the user.",
+  "frontend/src/hooks/useSwipe.ts": "Custom React hook for detecting horizontal and vertical swipe gestures on touch devices.",
+  "frontend/src/hooks/useQueries.ts": "Placeholder file for React Query hooks (currently empty as no backend queries are needed).",
+  "frontend/src/index.css": "Global styles with warm celebratory OKLCH color system, custom animations (float, heartbeat, bounce-gentle, fade-in, slide-in), lovable micro-interactions, and component styling.",
+  "frontend/tailwind.config.js": "Tailwind configuration extended with birthday theme colors, custom shadows including gift-glow, enhanced animations (float, heartbeat, bounce-gentle, pulse-gentle, fade-in-up, slide-in-down), and increased border radius.",
+  "frontend/src/content/preloadedPhotos.ts": "Exports an array of static asset paths for the six preloaded photos with correct \"-1\" suffixed filenames matching the uploaded WhatsApp images."
+}

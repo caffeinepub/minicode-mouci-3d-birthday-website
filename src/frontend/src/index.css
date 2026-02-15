@@ -1,0 +1,289 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --radius: 1.5rem;
+        
+        /* Birthday Theme - Warm Celebratory Palette */
+        --birthday-cream: 0.97 0.02 60;
+        --birthday-peach: 0.88 0.08 45;
+        --birthday-rose: 0.82 0.12 15;
+        --birthday-coral: 0.70 0.15 25;
+        --birthday-gold: 0.75 0.15 85;
+        --birthday-dark: 0.25 0.02 30;
+        
+        --background: var(--birthday-cream);
+        --foreground: var(--birthday-dark);
+        --card: 1 0 0;
+        --card-foreground: var(--birthday-dark);
+        --popover: 1 0 0;
+        --popover-foreground: var(--birthday-dark);
+        --primary: var(--birthday-gold);
+        --primary-foreground: var(--birthday-dark);
+        --secondary: var(--birthday-peach);
+        --secondary-foreground: var(--birthday-dark);
+        --muted: var(--birthday-peach);
+        --muted-foreground: 0.556 0.02 30;
+        --accent: var(--birthday-coral);
+        --accent-foreground: 1 0 0;
+        --destructive: 0.577 0.245 27.325;
+        --destructive-foreground: 0.985 0 0;
+        --border: var(--birthday-gold);
+        --input: 0.922 0.02 60;
+        --ring: var(--birthday-gold);
+    }
+
+    .dark {
+        --background: 0.20 0.02 30;
+        --foreground: var(--birthday-cream);
+        --card: 0.25 0.02 30;
+        --card-foreground: var(--birthday-cream);
+        --popover: 0.25 0.02 30;
+        --popover-foreground: var(--birthday-cream);
+        --primary: var(--birthday-gold);
+        --primary-foreground: var(--birthday-dark);
+        --secondary: 0.35 0.05 30;
+        --secondary-foreground: var(--birthday-cream);
+        --muted: 0.35 0.05 30;
+        --muted-foreground: 0.708 0.02 60;
+        --accent: var(--birthday-coral);
+        --accent-foreground: var(--birthday-cream);
+        --destructive: 0.704 0.191 22.216;
+        --destructive-foreground: var(--birthday-cream);
+        --border: var(--birthday-gold);
+        --input: 0.35 0.05 30;
+        --ring: var(--birthday-gold);
+    }
+
+    * {
+        @apply border-border;
+    }
+    
+    body {
+        @apply bg-background text-foreground;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    }
+}
+
+@layer utilities {
+    .hero-headline {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        text-shadow: 
+            0 4px 8px rgba(0, 0, 0, 0.1),
+            0 8px 16px rgba(255, 215, 0, 0.2);
+    }
+    
+    .bg-birthday-cream {
+        background-color: oklch(var(--birthday-cream));
+    }
+    
+    .bg-birthday-peach {
+        background-color: oklch(var(--birthday-peach));
+    }
+    
+    .bg-birthday-rose {
+        background-color: oklch(var(--birthday-rose));
+    }
+    
+    .bg-birthday-coral {
+        background-color: oklch(var(--birthday-coral));
+    }
+    
+    .bg-birthday-gold {
+        background-color: oklch(var(--birthday-gold));
+    }
+    
+    .bg-birthday-dark {
+        background-color: oklch(var(--birthday-dark));
+    }
+    
+    .text-birthday-cream {
+        color: oklch(var(--birthday-cream));
+    }
+    
+    .text-birthday-peach {
+        color: oklch(var(--birthday-peach));
+    }
+    
+    .text-birthday-rose {
+        color: oklch(var(--birthday-rose));
+    }
+    
+    .text-birthday-coral {
+        color: oklch(var(--birthday-coral));
+    }
+    
+    .text-birthday-gold {
+        color: oklch(var(--birthday-gold));
+    }
+    
+    .text-birthday-dark {
+        color: oklch(var(--birthday-dark));
+    }
+    
+    .border-birthday-gold {
+        border-color: oklch(var(--birthday-gold));
+    }
+    
+    .border-birthday-coral {
+        border-color: oklch(var(--birthday-coral));
+    }
+
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+@layer components {
+    .gift-card {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: slide-in-up 0.5s ease-out forwards;
+        opacity: 0;
+    }
+    
+    .gift-card:hover {
+        transform: translateY(-4px);
+    }
+    
+    .audio-player {
+        height: 54px;
+        border-radius: 1rem;
+        background: linear-gradient(135deg, oklch(var(--birthday-gold) / 0.1), oklch(var(--birthday-coral) / 0.1));
+        padding: 0.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .audio-player:hover {
+        background: linear-gradient(135deg, oklch(var(--birthday-gold) / 0.15), oklch(var(--birthday-coral) / 0.15));
+    }
+    
+    .audio-player::-webkit-media-controls-panel {
+        background: transparent;
+    }
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    10%, 30% {
+        transform: scale(1.1);
+    }
+    20%, 40% {
+        transform: scale(1);
+    }
+}
+
+@keyframes bounce-gentle {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse-gentle {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-in-down {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+.animate-bounce-gentle {
+    animation: bounce-gentle 2s ease-in-out infinite;
+}
+
+.animate-pulse-gentle {
+    animation: pulse-gentle 2s ease-in-out infinite;
+}
+
+.animate-fade-in {
+    animation: fade-in 0.5s ease-out forwards;
+}
+
+.animate-fade-in-up {
+    animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.animate-slide-in-down {
+    animation: slide-in-down 0.6s ease-out forwards;
+}
+
+/* Shadow utilities */
+.shadow-gift-glow {
+    box-shadow: 
+        0 10px 40px -10px rgba(255, 215, 0, 0.3),
+        0 20px 60px -15px rgba(255, 182, 193, 0.2);
+}

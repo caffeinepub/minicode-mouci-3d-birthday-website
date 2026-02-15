@@ -1,0 +1,87 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "Website project: publish a birthday-style site that reliably shows images and plays background music from the start.",
+  "architectural_notes": [
+    "Static assets (images/audio) must be present in the production build (e.g., under public/assets or an equivalent bundled path).",
+    "Background audio should be initialized on page load and not rendered as a separate UI section."
+  ],
+  "known_issues": [
+    "Production site currently does not display images and does not play the song due to missing/incorrect asset paths or missing files."
+  ],
+  "isFixRequest": true,
+  "imageRequirements": "## Required Images\n- Anime-inspired watercolor birthday landscape illustration with warm pastel tones and soft film-grain texture (fallback-anime-watercolor.dim_1920x1080.png)",
+  "existing_features": [
+    {
+      "id": "feature-update-the-preloaded-gallery-photo-path-list-to-match-the-exact-filenames-of-the-uploaded-images-including-the-1-suffixes-so-the-site-references-the-correct-static-assets",
+      "title": "Update the preloaded gallery photo path list to match the exact filenames of the uploaded images (including the “-1” suffixes) so the site references the correct static assets.",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-remove-the-dedicated-on-page-audio-section-ui-and-replace-it-with-background-music-that-starts-from-the-beginning-and-plays-continuously-in-the-background",
+      "title": "Remove the dedicated on-page Audio Section UI and replace it with background music that starts from the beginning and plays continuously in the background.",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-robust-fallback-so-the-photos-section-always-shows-at-least-one-valid-image-even-if-preloaded-photos-fail-to-load-use-a-locally-bundled-fallback-image",
+      "title": "Add a robust fallback so the Photos section always shows at least one valid image even if preloaded photos fail to load (use a locally bundled fallback image).",
+      "reqIds": [
+        "REQ-5"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-render-any-newly-generated-image-assets-as-static-files-under-frontend-public-assets-generated-and-reference-them-directly-from-the-frontend-do-not-serve-them-through-the-backend",
+      "title": "Render any newly generated image assets as static files under frontend/public/assets/generated and reference them directly from the frontend (do not serve them through the backend).",
+      "reqIds": [
+        "REQ-6"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Ensure at least one valid image is included and displays without errors (use a Ghibli-style image or a real photo as fallback).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Play the song automatically from the beginning as background music (no dedicated song section).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-3",
+      "summary": "Fix missing/static asset setup so images and audio files are correctly packaged and load in production without errors.",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-4",
+      "summary": "Add the 6 user-uploaded WhatsApp JPEG images as static frontend assets and ensure they load in production without 404s.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "status": "pending"
+    },
+    {
+      "id": "AR-7",
+      "summary": "Bundle the friendship song audio file as a static frontend asset at the exact path used by the app and ensure the deployed production site can fetch it without errors.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Fix missing photo/audio assets and enable autoplay background music",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

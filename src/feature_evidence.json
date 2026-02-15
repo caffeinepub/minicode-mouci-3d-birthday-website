@@ -1,0 +1,78 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-update-the-preloaded-gallery-photo-path-list-to-match-the-exact-filenames-of-the-uploaded-images-including-the-1-suffixes-so-the-site-references-the-correct-static-assets",
+      "featureTitle": "Update the preloaded gallery photo path list to match the exact filenames of the uploaded images (including the “-1” suffixes) so the site references the correct static assets.",
+      "files": [
+        "frontend/src/content/preloadedPhotos.ts"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-remove-the-dedicated-on-page-audio-section-ui-and-replace-it-with-background-music-that-starts-from-the-beginning-and-plays-continuously-in-the-background",
+      "featureTitle": "Remove the dedicated on-page Audio Section UI and replace it with background music that starts from the beginning and plays continuously in the background.",
+      "files": [
+        "frontend/src/App.tsx",
+        "frontend/src/components/AudioSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-add-a-robust-fallback-so-the-photos-section-always-shows-at-least-one-valid-image-even-if-preloaded-photos-fail-to-load-use-a-locally-bundled-fallback-image",
+      "featureTitle": "Add a robust fallback so the Photos section always shows at least one valid image even if preloaded photos fail to load (use a locally bundled fallback image).",
+      "files": [
+        "frontend/src/components/PhotosSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-5"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-render-any-newly-generated-image-assets-as-static-files-under-frontend-public-assets-generated-and-reference-them-directly-from-the-frontend-do-not-serve-them-through-the-backend",
+      "featureTitle": "Render any newly generated image assets as static files under frontend/public/assets/generated and reference them directly from the frontend (do not serve them through the backend).",
+      "files": [
+        "frontend/src/components/PhotosSection.tsx"
+      ],
+      "components": [
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-6"
+      ],
+      "confidence": "high"
+    }
+  ]
+}
